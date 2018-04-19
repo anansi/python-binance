@@ -31,3 +31,6 @@ def test_exact_amount():
             interval=Client.KLINE_INTERVAL_1MINUTE,
             start_str="1st March 2018"
         )
+
+
+test_exact_amount()
