@@ -1,5 +1,7 @@
 import sys
 sys.path.insert(0, '../')
+sys.path.insert(0, '/root/sites/binance_python/')
+
 import time
 import dateparser
 import pytz
@@ -189,7 +191,7 @@ client = Client(MY_KEY, MY_SECRET)
 #order = client.get_order(symbol="BTCUSDT",orderId="88258051")
 
 #withdraws = client.get_withdraw_history()
-while datetime.now().replace(tzinfo=pytz.UTC).second < 50:
+while datetime.now().replace(tzinfo=pytz.UTC).second < 65:
     print datetime.now().replace(tzinfo=pytz.UTC).second
     #fetch binance data for coins
     btc_lines = get_historical_klines("BTCUSDT", interval, start, end)
