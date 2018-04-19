@@ -1,10 +1,11 @@
+import sys
+sys.path.insert(0, '../')
 import time
 import dateparser
 import pytz
 import json
 
-import sys
-sys.path.insert(0, '../')
+
 
 from datetime import datetime
 from binance.client import Client
