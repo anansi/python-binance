@@ -3,6 +3,9 @@ import dateparser
 import pytz
 import json
 
+import sys
+sys.path.insert(0, '../')
+
 from datetime import datetime
 from binance.client import Client
 
@@ -45,7 +48,8 @@ def interval_to_milliseconds(interval):
         "m": 60,
         "h": 60 * 60,
         "d": 24 * 60 * 60,
-        "w": 7 * 24 * 60 * 60
+        "w": 7 * 24 * 60 * 60,
+        "M": 30 * 24 * 60 * 60,
     }
 
     unit = interval[-1]
@@ -139,7 +143,7 @@ def get_historical_klines(symbol, interval, start_str, end_str=None):
 symbol = "ETHBTC"
 start = "1 Dec, 2017"
 end = "1 Jan, 2018"
-interval = Client.KLINE_INTERVAL_30MINUTE
+interval = Client.KLINE_INTERVAL_1MONTH
 
 klines = get_historical_klines(symbol, interval, start, end)
 
