@@ -191,7 +191,7 @@ client = Client(MY_KEY, MY_SECRET)
 #order = client.get_order(symbol="BTCUSDT",orderId="88258051")
 
 #withdraws = client.get_withdraw_history()
-while datetime.now().replace(tzinfo=pytz.UTC).second < 65:
+while datetime.now().replace(tzinfo=pytz.UTC).second < 50:
     print datetime.now().replace(tzinfo=pytz.UTC).second
     #fetch binance data for coins
     btc_lines = get_historical_klines("BTCUSDT", interval, start, end)
