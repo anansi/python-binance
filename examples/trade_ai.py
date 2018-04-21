@@ -198,10 +198,8 @@ while datetime.now().replace(tzinfo=pytz.UTC).second < 50:
     icx_lines = get_historical_klines("ICXBTC", interval, start, end)
     bnb_lines = get_historical_klines("BNBBTC", interval, start, end)
 
-
-
     # declare the initial position buy price
-    icx_token_count = 1728.01
+    icx_token_count = 1718.01
     entry_btc_price = 8115.0
     entry_icx_price = 0.0003931
 
@@ -234,8 +232,8 @@ while datetime.now().replace(tzinfo=pytz.UTC).second < 50:
     print "profit: " + str(round(profit_percentage,1)) + "%"
 
     # check for usd value stop loss
-    if profit_percentage < -3:
-        print "3% lost"
+    if profit_percentage < 12.5:
+        print "profiting less that 12.5%"
 
         # check the btc holding before the sell is done
 
