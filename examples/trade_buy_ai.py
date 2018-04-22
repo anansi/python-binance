@@ -176,93 +176,12 @@ def close_price(candle):
     close_value = candle[4]
     return close_value
 
-start = "1 Dec, 2017"
-end = "1 Jan, 2018"
-interval = Client.KLINE_INTERVAL_1MONTH
+    # open a file with filename including symbol, interval and start and end converted to milliseconds
+    with open(
+            "position.txt",
+            'w'  # set file write mode
+    ) as f:
+        f.write("holding")
 
-# place a test market buy order, to place an actual order use the create_order function
-client = Client(MY_KEY, MY_SECRET)
-# order = client.create_order(
-#     symbol='BTCUSDT',
-#     side=Client.SIDE_BUY,
-#     type=Client.ORDER_TYPE_MARKET,
-#     quantity=0.001)
-
-#order = client.get_order(symbol="BTCUSDT",orderId="88258051")
-
-#withdraws = client.get_withdraw_history()
-while datetime.now().replace(tzinfo=pytz.UTC).second < 50:
-    print datetime.now().replace(tzinfo=pytz.UTC).second
-    #fetch binance data for coins
-    btc_lines = get_historical_klines("BTCUSDT", interval, start, end)
-    icx_lines = get_historical_klines("ICXBTC", interval, start, end)
-    bnb_lines = get_historical_klines("BNBBTC", interval, start, end)
-
-    # declare the initial position buy price
-    icx_token_count = 1718.01
-    entry_btc_price = 8115.0
-    entry_icx_price = 0.0003931
-
-    # print profits for each coin
-    candle_to_string(btc_lines[0], entry_btc_price)
-    candle_to_string(icx_lines[0], entry_icx_price)
-
-    # calculate initial usd value of the position
-    entry_usdt_conversion_multiplier = entry_icx_price * entry_btc_price
-    entry_usdt_value = icx_token_count * entry_usdt_conversion_multiplier
-
-    # calculate current exchange prices
-    current_bnb_btc_price = float(close_price(bnb_lines[0]))
-    current_btc_usdt_price = float(close_price(btc_lines[0]))
-    current_icx_btc_price = float(close_price(icx_lines[0]))
-
-    # calculate multipliers for conversions
-    current_icx_usdt_conversion_multiplier = current_btc_usdt_price * current_icx_btc_price
-    current_icx_bnb_conversion_multiplier = current_icx_btc_price / current_bnb_btc_price
-
-    # calculate trx cost of purchase of position
-    trx_cost_in_bnb = icx_token_count * current_icx_bnb_conversion_multiplier * 0.0005
-
-    # calculate current usd value and profit of the position
-    current_usdt_value = icx_token_count * current_icx_usdt_conversion_multiplier
-    current_profit = current_usdt_value - entry_usdt_value
-
-    print "profit usd: %s" % current_profit
-    profit_percentage =  (current_usdt_value - entry_usdt_value) / current_usdt_value * 100.0
-    print "profit: " + str(round(profit_percentage,1)) + "%"
-
-    # check for usd value stop loss
-    if profit_percentage < 12.5:
-        print "profiting less that 12.5%"
-
-        # check the btc holding before the sell is done
-
-        order = client.create_order(
-            symbol='ICXBTC',
-            side=Client.SIDE_SELL,
-            type=Client.ORDER_TYPE_MARKET,
-            quantity=icx_token_count)
-
-        # check the btc holding after the sell is done
-        #and tether the new btc. thats what was gained in the sell
-
-        btc_holding = round(icx_token_count * current_icx_btc_price * 0.98, 4)
-        order = client.create_order(
-            symbol='BTCUSDT',
-            side=Client.SIDE_SELL,
-            type=Client.ORDER_TYPE_MARKET,
-            quantity=btc_holding)
-
-        print "order done"
-
-
-    # check for usd value increase take profit signal
-    if profit_percentage > 3.6:
-        print "gained over 3.6%"
-
-
-    print "\n"
-    time.sleep(1)
-
-
+print "order done"
 
