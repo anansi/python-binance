@@ -378,7 +378,7 @@ client = Client(MY_KEY, MY_SECRET)
 print "starting checks"
 
 
-while datetime.now().replace(tzinfo=pytz.UTC).second < 570:
+while datetime.now().replace(tzinfo=pytz.UTC).second < 50:
     state = get_position_from_file()[0]
     if state == "NO_TRADE":
         pass
