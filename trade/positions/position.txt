@@ -1,5 +1,5 @@
 HOLDING_POSITION
-icx_token_count 1778.0
-entry_btc_price 8913.91
-entry_icx_price 0.0004038
-stop_loss -15
+icx_token_count 2051
+entry_btc_price 9110
+entry_icx_price 0.0004042
+stop_loss 3
