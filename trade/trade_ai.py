@@ -181,14 +181,14 @@ def write_note(note_line):
     try:
         f = open(
             "trade/positions/notes.txt",
-            'w'  # set file write mode
+            'a'  # set file write mode
         )
         file_exist = True
     except:
         pass
 
     if file_exist:
-        f.write(note_line)
+        f.write(note_line+"\n")
 
 def write_position_file(type, state, icx_token_count=None, entry_btc_price=None, entry_icx_price=None, stop_loss=None):
 
@@ -348,33 +348,33 @@ def check_sell():
     print "profit: " + str(round(profit_percentage, 1)) + "%"
 
     # check for usd value stop loss
-    if profit_percentage < -stop_loss:
-        print "profiting less than {}%".format(-stop_loss)
+    # if profit_percentage < -stop_loss:
+    #     print "profiting less than {}%".format(-stop_loss)
+    #
+    #     # check the btc holding before the sell is done
+    #
+    #     order = client.create_order(
+    #         symbol='ICXBTC',
+    #         side=Client.SIDE_SELL,
+    #         type=Client.ORDER_TYPE_MARKET,
+    #         quantity=round(icx_token_count,2))
+    #
+    #     # check the btc holding after the sell is done
+    #     # and tether the new btc. thats what was gained in the sell
+    #
+    #     btc_holding = round(icx_token_count * current_icx_btc_price * 0.98, 4)
+    #     order = client.create_order(
+    #         symbol='BTCUSDT',
+    #         side=Client.SIDE_SELL,
+    #         type=Client.ORDER_TYPE_MARKET,
+    #         quantity=btc_holding)
+    #
+    #     write_position_file("NEW","NO_TRADE")
 
-        # check the btc holding before the sell is done
 
-        order = client.create_order(
-            symbol='ICXBTC',
-            side=Client.SIDE_SELL,
-            type=Client.ORDER_TYPE_MARKET,
-            quantity=round(icx_token_count,2))
-
-        # check the btc holding after the sell is done
-        # and tether the new btc. thats what was gained in the sell
-
-        btc_holding = round(icx_token_count * current_icx_btc_price * 0.98, 4)
-        order = client.create_order(
-            symbol='BTCUSDT',
-            side=Client.SIDE_SELL,
-            type=Client.ORDER_TYPE_MARKET,
-            quantity=btc_holding)
-
-        write_position_file("NEW","NO_TRADE")
-
-
-        import os
-        #os.remove("./position.txt")
-        print "order done"
+        # import os
+        # #os.remove("./position.txt")
+        # print "order done"
 
     # check for usd value increase take profit signal
     if profit_percentage > 3.6:
