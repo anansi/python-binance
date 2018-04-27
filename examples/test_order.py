@@ -14,6 +14,6 @@ order = client.create_order(
     symbol='BTCUSDT',
     side=Client.SIDE_SELL,
     type=Client.ORDER_TYPE_MARKET,
-    quantity=0.000003)
+    quantity=0.001)
 
 print "order placed"
