@@ -176,6 +176,19 @@ def close_price(candle):
     close_value = candle[4]
     return close_value
 
+def write_note(note_line):
+    file_exist = False
+    try:
+        f = open(
+            "trade/positions/notes.txt",
+            'w'  # set file write mode
+        )
+        file_exist = True
+    except:
+        pass
+
+    if file_exist:
+        f.write(note_line)
 
 def write_position_file(type, state, icx_token_count=None, entry_btc_price=None, entry_icx_price=None, stop_loss=None):
 
@@ -327,6 +340,8 @@ def check_sell():
     # calculate current usd value and profit of the position
     current_usdt_value = icx_token_count * current_icx_usdt_conversion_multiplier
     current_profit = current_usdt_value - entry_usdt_value
+
+    write_note("line")
 
     print "profit usd: %s" % current_profit
     profit_percentage = (current_usdt_value - entry_usdt_value) / current_usdt_value * 100.0
