@@ -1,5 +1,5 @@
 # script for cronjob on server
-cd /root/sites/binance_python/trade
+cd /root/sites/binance_python/
 workon bp
-python trade_ai.py
+python trade/trade_ai.py
 
