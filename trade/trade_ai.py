@@ -1,8 +1,4 @@
 import sys
-sys.path.insert(0, '../')
-sys.path.insert(0, '/root/sites/binance_python/')
-sys.path.insert(0, '/root/sites/binance_python/trade/')
-
 import time
 import dateparser
 import pytz
@@ -179,6 +175,8 @@ def close_price(candle):
 
 def write_note(note_line):
     file_exist = False
+    import os
+    print os.path.abspath('')
     try:
         f = open(
             "trade/positions/notes.txt",
